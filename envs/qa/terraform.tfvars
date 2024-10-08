@@ -1,0 +1,5 @@
+env="qa"
+project="ratiopbc-qa"
+region="us-central1"
+zone="us-central1-b"
+phx_host="datahub-qa.yuvohealth.com"

@@ -1,0 +1,6 @@
+env="prod"
+project="yuvo-production"
+region="us-central1"
+tier="db-custom-8-30720"
+zone="us-central1-b"
+phx_host="datahub.yuvohealth.com"

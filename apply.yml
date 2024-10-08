@@ -1,0 +1,23 @@
+steps:
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.3.7'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      cd envs/${_ENV}
+      echo "*************** BRANCH: ${BRANCH_NAME}"
+      echo "*************** TERRAFORM INIT env: ${_ENV}"
+      INIT_OUTPUT=`terraform init -no-color`
+      if [ $$? -ne 0 ]; then
+        echo $$INIT_OUTPUT >&2
+        exit 1
+      else
+        echo "*************** TERRAFORM INIT env: ${_ENV} - SUCCESSFUL"
+      fi
+      echo "*************** TERRAFOM APPLY env: ${_ENV}"
+      terraform apply -auto-approve -no-color
+
+serviceAccount: projects/$PROJECT_ID/serviceAccounts/yuvo-ops-cloud-build@$PROJECT_ID.iam.gserviceaccount.com
+logsBucket: gs://yuvo-ops-${_ENV}-cloud-build-logs
+
